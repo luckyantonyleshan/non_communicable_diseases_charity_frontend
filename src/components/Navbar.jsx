@@ -16,6 +16,7 @@ const Navbar = () => {
         <a href="#features" onClick={closeMenu}>Features</a>
         <a href="#learning" onClick={closeMenu}>Learning</a>
         <a href="#donation" onClick={closeMenu}>Donations</a>
+        <a href="#login" className="login-btn" onClick={closeMenu}>Login</a>
       </div>
 
       <div className="menu-toggle" onClick={toggleMenu}>
