@@ -25,20 +25,20 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const response = await fetch("", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-    })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
     if (!response.ok) {
-        throw new Error("Login Failed")
+      throw new Error("Login Failed");
     }
-    const data = await response.json()
-    const token = data.token
-    setToken(token)
-    localStorage.setItem("token", token)
-};
+    const data = await response.json();
+    const token = data.token;
+    setToken(token);
+    localStorage.setItem("token", token);
+  };
   const logout = () => {
     setToken = null;
     localStorage.removeItem("token");
