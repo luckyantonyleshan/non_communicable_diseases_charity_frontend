@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify({ email, password }),
     });
     if (!response.ok) {
-      throw new Error("Registration");
+      throw new Error("Registration Failed");
     }
     const data = await response.json();
     const token = data.token;
@@ -23,7 +23,22 @@ export const AuthProvider = ({ children }) => {
     return token;
   };
 
-  const login = async (email, password) => {};
+  const login = async (email, password) => {
+    const response = await fetch("", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+    })
+    if (!response.ok) {
+        throw new Error("Login Failed")
+    }
+    const data = await response.json()
+    const token = data.token
+    setToken(token)
+    localStorage.setItem("token", token)
+};
   const logout = () => {
     setToken = null;
     localStorage.removeItem("token");
