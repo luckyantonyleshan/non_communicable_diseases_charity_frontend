@@ -13,9 +13,8 @@ const Navbar = () => {
 
       <div className={`nav-links ${isOpen ? "open" : ""}`}>
         <a href="#home" onClick={closeMenu}>Home</a>
-        <a href="#features" onClick={closeMenu}>Features</a>
-        <a href="#learning" onClick={closeMenu}>Learning</a>
-        <a href="#donation" onClick={closeMenu}>Donations</a>
+        <a href="#learning" onClick={closeMenu}>Learn</a>
+        <a href="#donation" onClick={closeMenu}>Donate</a>
         <a href="#login" className="login-btn" onClick={closeMenu}>Login</a>
       </div>
 
