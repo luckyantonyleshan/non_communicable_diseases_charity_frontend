@@ -1,82 +1,55 @@
 import { useState } from "react";
-import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
+import { useAuth } from "../contexts/AuthContext";
 
-function LoginForm() {
-  const { login, register } = useAuth();
-  const [mode, setMode] = useState("login");
+export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
-    setLoading(true);
 
     try {
-      if (mode === "login") {
-        await login(username, password);
-      } else {
-        await register(username, password);
+      const res = await fetch(`${API_BASE_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Login failed");
       }
 
-      navigate("/home");
+      const data = await res.json();
+      login(data.token);
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.message || "Something went wrong");
-    } finally {
-      setLoading(false);
+      setError(err.message);
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit} >
-      <h2 >
-        {mode === "login" ? "Log In" : "Register"}
-      </h2>
-
-      {error && <p >{error}</p>}
-
-      <div >
-        <label>Username</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
-
-      <div >
-        <label >Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-
-      <button
-        type="submit"
-        disabled={loading}
-      >
-        {loading ? "Please wait..." : mode === "login" ? "Log In" : "Register"}
-      </button>
-
-      <p>
-        {mode === "login" ? "Don't have an account?" : "Already registered?"}{" "}
-        <button
-          type="button"
-          onClick={() => setMode(mode === "login" ? "register" : "login")}
-        >
-          {mode === "login" ? "Register here" : "Log in"}
-        </button>
-      </p>
+    <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <input
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+      <input
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        type="password"
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
     </form>
   );
 }
-
-export default LoginForm;
