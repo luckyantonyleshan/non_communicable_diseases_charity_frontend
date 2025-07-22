@@ -1,7 +1,5 @@
-import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
 
-function RegisterPage() {
-  return <LoginForm mode="register" />;
+export default function RegisterPage() {
+  return <RegisterForm />;
 }
-
-export default RegisterPage;
