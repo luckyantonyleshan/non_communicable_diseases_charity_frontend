@@ -1,60 +1,39 @@
 import React, { useState } from 'react';
-import './App.css'; 
 
-export default function DonationForm() {
-  const [form, setForm] = useState({
-    username: '',
-    email: '',
-    amount: '',
-  });
+function DonationForm() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [amount, setAmount] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Donation submitted:', form);
-    alert('Thank you for your donation!');
-    setForm({ username: '', email: '', amount: '' });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    console.log('Donation submitted:', { username, email, password, amount });
+    
   };
 
   return (
-    <div className="donation-container">
-      <h2 className="donation-heading">Support the Fight Against NCDs</h2>
-      <form onSubmit={handleSubmit} className="donation-form">
-        <input
-          type="text"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-          placeholder="Username"
-          required
-          className="donation-input"
-        />
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Email Address"
-          required
-          className="donation-input"
-        />
-        <input
-          type="number"
-          name="amount"
-          value={form.amount}
-          onChange={handleChange}
-          placeholder="Donation Amount (USD)"
-          required
-          className="donation-input"
-        />
-        <button type="submit" className="donation-button">
-          Donate Now
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Username:
+        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+      </label>
+      <label>
+        Email:
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      </label>
+      <label>
+        Password:
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      </label>
+      <label>
+        Amount:
+        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      </label>
+      <button type="submit">Donate Now</button>
+    </form>
   );
 }
+
+export default DonationForm;
