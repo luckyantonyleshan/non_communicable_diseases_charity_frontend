@@ -39,7 +39,7 @@ body, .app {
   justify-content: space-between;
   align-items: center;
   padding: 3rem 2rem;
-  background: white;
+  background-image: url("https://media.istockphoto.com/id/2192954223/photo/prevention-detection-and-treatment-of-ncds-concept-wooden-blocks-with-ncds-icons-related-to.jpg?s=612x612&w=0&k=20&c=vLx_9g6lvKXIWkV2ry8aE3nOAGZ8GQHv8V_OVGF5d9k= ");
 }
 
 .hero-text {
@@ -175,6 +175,7 @@ th {
       align-items: center;
       justify-content: space-between;
       min-height: 200px;
+      background-image: url(" https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=");
     }
     
     .learn-card-icon {
