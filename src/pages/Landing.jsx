@@ -8,11 +8,11 @@ function Landing() {
   if (user) return <Navigate to="/home" />;
 
   return (
-    <div className="landing">
-      <h1>Welcome to NCD Prevention</h1>
+    <div>
+      <h1>Welcome to NCD Project Page</h1>
       <LoginForm />
       <p>
-        Don’t have an account? <Link to="/register">Register here</Link>
+        Don’t have an account? <Link to="/register">Register</Link>
       </p>
     </div>
   );
