@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.body.style.fontFamily = 'Arial, sans-serif';
-  document.body.style.padding = '20px';
+  document.body.style.padding = '40px';
 
   const title = document.createElement('h1');
   title.textContent = 'Learn About Non-Communicable Diseases';
@@ -30,3 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(card);
   });
 });
+
+
+
