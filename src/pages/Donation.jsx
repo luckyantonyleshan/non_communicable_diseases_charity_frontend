@@ -1,53 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.style.fontFamily = 'Arial, sans-serif';
-  document.body.style.padding = '20px';
+import React, { useState } from 'react';
+// import '../../styles/App.css';
 
-  const heading = document.createElement('h1');
-  heading.textContent = 'Donate to Support NCD Awareness';
-  document.body.appendChild(heading);
+const Donation = () => {
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+  const [message, setMessage] = useState('');
 
-  const nameInput = document.createElement('input');
-  nameInput.placeholder = 'Your Name';
-  nameInput.id = 'name';
-  nameInput.style.display = 'block';
-  nameInput.style.margin = '10px 0';
-  nameInput.style.padding = '10px';
-
-  const amountInput = document.createElement('input');
-  amountInput.placeholder = 'Amount in KES';
-  amountInput.type = 'number';
-  amountInput.id = 'amount';
-  amountInput.style.display = 'block';
-  amountInput.style.margin = '10px 0';
-  amountInput.style.padding = '10px';
-
-  const donateBtn = document.createElement('button');
-  donateBtn.textContent = 'Donate';
-  donateBtn.style.padding = '10px 20px';
-
-  const message = document.createElement('div');
-  message.id = 'message';
-  message.style.marginTop = '15px';
-  message.style.fontWeight = 'bold';
-
-  document.body.append(nameInput, amountInput, donateBtn, message);
-
-  donateBtn.addEventListener('click', () => {
-    const name = nameInput.value.trim();
-    const amount = parseFloat(amountInput.value);
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (!name || isNaN(amount) || amount <= 0) {
       alert('Please enter a valid name and amount.');
       return;
     }
-
     const donations = JSON.parse(localStorage.getItem('donations')) || [];
     donations.push({ name, amount });
     localStorage.setItem('donations', JSON.stringify(donations));
+    setMessage(`🎉 Thank you, ${name}, for donating KES ${amount}!`);
+    setName('');
+    setAmount('');
+  };
 
-    message.textContent = `🎉 Thank you, ${name}, for donating KES ${amount}!`;
+  return (
+    <div className="donation-page">
+      <h1>Donate to Support NCD Awareness</h1>
+      <input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Your Name"
+      />
+      <input
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        type="number"
+        placeholder="Amount in KES"
+      />
+      <button onClick={handleSubmit}>Donate</button>
+      {message && <div className="donation-message">{message}</div>}
+    </div>
+  );
+};
 
-    nameInput.value = '';
-    amountInput.value = '';
-  });
-});
+export default Donation;

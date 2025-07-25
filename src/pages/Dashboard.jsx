@@ -1,8 +1,9 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+// import '../../styles/App.css';
 
 export default function Dashboard() {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -11,9 +12,24 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
-      <h1>This is our protected dashboard</h1>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="dashboard-container">
+      <h1>Welcome, {user?.username}</h1>
+      <div className="dashboard-grid">
+        <div className="dashboard-card" onClick={() => navigate("/diseases")}>
+          <h3>View Diseases</h3>
+        </div>
+        <div className="dashboard-card" onClick={() => navigate("/areas")}>
+          <h3>View Areas</h3>
+        </div>
+        {user?.role === "admin" && (
+          <div className="dashboard-card" onClick={() => navigate("/admin")}>
+            <h3>Admin Panel</h3>
+          </div>
+        )}
+      </div>
+      <button className="logout-btn" onClick={handleLogout}>
+        Logout
+      </button>
     </div>
   );
 }

@@ -1,6 +1,5 @@
-
 import React from 'react';
-import './App.css';
+// import '../../styles/App.css';
 
 const LearnCard = ({ icon, message, label }) => {
   return (
@@ -15,5 +14,3 @@ const LearnCard = ({ icon, message, label }) => {
 };
 
 export default LearnCard;
-
-

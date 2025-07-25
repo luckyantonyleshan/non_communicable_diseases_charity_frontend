@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from 'react';
+// import '../../styles/App.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +11,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">🩺 NCD Care</div>
 
-      <div className={`nav-links ${isOpen ? "open" : ""}`}>
+      <div className={`nav-links ${isOpen ? 'open' : ''}`}>
         <a href="#home" onClick={closeMenu}>Home</a>
         <a href="#learning" onClick={closeMenu}>Learn</a>
         <a href="#donation" onClick={closeMenu}>Donate</a>
