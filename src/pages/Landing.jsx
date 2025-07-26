@@ -1,6 +1,7 @@
 import { useAuth } from "../contexts/AuthContext";
 import LoginForm from "../components/LoginForm";
 import { Navigate, Link } from "react-router-dom";
+import '../styles/App.css';
 
 function Landing() {
   const { user } = useAuth();
@@ -8,11 +9,11 @@ function Landing() {
   if (user) return <Navigate to="/home" />;
 
   return (
-    <div>
+    <div className="landing-page">
       <h1>Welcome to NCD Project Page</h1>
       <LoginForm />
       <p>
-        Don’t have an account? <Link to="/register">Register</Link>
+        Don't have an account? <Link to="/register">Register</Link>
       </p>
     </div>
   );
