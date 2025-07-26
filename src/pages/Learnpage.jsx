@@ -1,7 +1,7 @@
 import React from 'react';
 import LearnCard from './Learncard';
-// import '../../styles/App.css';
-// import src/styles/App.css;
+import '../styles/App.css';
+
 
 const Learnpage = () => {
   const learningResources = [

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config.js';  
-// import '../../styles/App.css';
+import '../styles/App.css';
 
 const Areas = () => {
   const [areas, setAreas] = useState([]);

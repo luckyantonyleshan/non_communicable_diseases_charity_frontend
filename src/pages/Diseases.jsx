@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DiseaseCard from '../components/DiseaseCard';
 import apiService from '../../services/apiService';
-// import '../../styles/App.css';
+import '../styles/App.css';
 
 const Diseases = () => {
   const [diseases, setDiseases] = useState([]);

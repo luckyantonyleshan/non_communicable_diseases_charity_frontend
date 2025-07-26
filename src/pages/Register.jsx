@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from '../config.js';  
+import '../styles/App.css';
+
 
 function Register() {
   const navigate = useNavigate();

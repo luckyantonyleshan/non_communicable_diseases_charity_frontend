@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { API_BASE_URL } from '../config.js';  
+import '../styles/App.css';
+
 
 const ReviewForm = ({ areaId }) => {
   const { user } = useAuth();

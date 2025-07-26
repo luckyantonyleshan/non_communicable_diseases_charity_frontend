@@ -1,40 +1,66 @@
+// pages/Donation.jsx
 import React, { useState } from 'react';
-// import '../../styles/App.css';
+import { useAuth } from "../contexts/AuthContext";
+import apiService from "../../services/apiService";
+import '../styles/App.css';
+
 
 const Donation = () => {
-  const [name, setName] = useState('');
-  const [amount, setAmount] = useState('');
+  const { user } = useAuth();
+  const [formData, setFormData] = useState({
+    donor_name: user?.username || '',
+    amount: '',
+    message: ''
+  });
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || isNaN(amount) || amount <= 0) {
-      alert('Please enter a valid name and amount.');
-      return;
+    try {
+      await apiService.createDonation({
+        amount: parseFloat(formData.amount),
+        donor_name: formData.donor_name,
+        message: formData.message
+      });
+      setMessage(`Thank you for your donation of KES ${formData.amount}!`);
+      setFormData({ ...formData, amount: '' });
+    } catch (err) {
+      setMessage(`Error: ${err.message}`);
     }
-    const donations = JSON.parse(localStorage.getItem('donations')) || [];
-    donations.push({ name, amount });
-    localStorage.setItem('donations', JSON.stringify(donations));
-    setMessage(`🎉 Thank you, ${name}, for donating KES ${amount}!`);
-    setName('');
-    setAmount('');
   };
 
   return (
     <div className="donation-page">
       <h1>Donate to Support NCD Awareness</h1>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Your Name"
-      />
-      <input
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        type="number"
-        placeholder="Amount in KES"
-      />
-      <button onClick={handleSubmit}>Donate</button>
+      <form onSubmit={handleSubmit}>
+        <input
+          name="donor_name"
+          value={formData.donor_name}
+          onChange={handleChange}
+          placeholder="Your Name"
+          required
+        />
+        <input
+          name="amount"
+          type="number"
+          value={formData.amount}
+          onChange={handleChange}
+          placeholder="Amount in KES"
+          min="1"
+          required
+        />
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="Optional message"
+        />
+        <button type="submit">Donate</button>
+      </form>
       {message && <div className="donation-message">{message}</div>}
     </div>
   );

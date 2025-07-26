@@ -1,10 +1,14 @@
+// pages/Login.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import apiService from "../../services/apiService";
+import '../styles/App.css';
+
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
   const [credentials, setCredentials] = useState({ 
     username: "", 
@@ -24,7 +28,10 @@ function Login() {
       const { access_token } = await apiService.login(credentials);
       const userData = await apiService.getCurrentUser();
       login(userData, access_token);
-      navigate("/dashboard");
+      
+      // Redirect to the original requested page or dashboard
+      const from = location.state?.from?.pathname || "/dashboard";
+      navigate(from, { replace: true });
     } catch (err) {
       setError(err.message || "Login failed. Please try again.");
     }

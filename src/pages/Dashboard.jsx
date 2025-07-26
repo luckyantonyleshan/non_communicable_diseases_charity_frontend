@@ -1,6 +1,6 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-// import '../../styles/App.css';
+import '../styles/App.css';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();

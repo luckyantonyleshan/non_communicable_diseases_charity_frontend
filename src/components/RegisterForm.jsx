@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../config.js';  
+import '../styles/App.css';
+
 
 export default function RegisterForm() {
   const [username, setUsername] = useState('');

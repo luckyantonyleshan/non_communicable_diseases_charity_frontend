@@ -1,7 +1,7 @@
 import { useAuth } from "../contexts/AuthContext";
 import LoginForm from "../components/LoginForm";
 import { Navigate, Link } from "react-router-dom";
-// import '../../styles/App.css';
+import '../styles/App.css';
 
 function Landing() {
   const { user } = useAuth();

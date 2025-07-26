@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_BASE_URL } from '../config.js';  
 import ReviewForm from '../components/ReviewForm';
-// import '../../styles/App.css';
+import '../styles/App.css';
 
 const AreaDetails = () => {
   const { id } = useParams();
