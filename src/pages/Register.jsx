@@ -1,4 +1,3 @@
-// src/pages/Register.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from '../config.js';  
@@ -15,7 +14,6 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Debug: Log form data before sending
     console.log("Submitting:", formData);
     try {
       const res = await fetch(`${API_BASE_URL}/auth/register`, {
@@ -24,7 +22,7 @@ function Register() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log("Response:", data); // Debug the response
+      console.log("Response:", data); 
       if (res.ok) {
         alert("Registration successful. Please log in.");
         navigate("/login");

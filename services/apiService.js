@@ -1,4 +1,3 @@
-// services/apiService.js
 import { API_BASE_URL } from '../src/config';
 const apiService = {
   async request(endpoint, method = 'GET', body = null, requiresAuth = true) {
@@ -37,7 +36,6 @@ const apiService = {
     }
   },
 
-  // Auth endpoints
   async login(credentials) {
     return this.request('/auth/login', 'POST', credentials, false);
   },
@@ -46,17 +44,14 @@ const apiService = {
     return this.request('/auth/register', 'POST', userData, false);
   },
 
-  // User endpoints
   async getCurrentUser() {
     return this.request('/users/me');
   },
 
-  // Disease endpoints
   async getDiseases() {
     return this.request('/diseases', 'GET', null, false);
   },
 
-  // Area endpoints
   async getAreas() {
     return this.request('/areas', 'GET', null, false);
   },
@@ -65,12 +60,10 @@ const apiService = {
     return this.request(`/areas/${id}`, 'GET', null, false);
   },
 
-  // Donation endpoints
   async createDonation(donationData) {
     return this.request('/donations', 'POST', donationData);
   },
 
-  // Review endpoints
   async createReview(reviewData) {
     return this.request('/reviews', 'POST', reviewData);
   }

@@ -1,9 +1,7 @@
-// pages/Donation.jsx
 import React, { useState } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import apiService from "../../services/apiService";
 import '../styles/App.css';
-
 
 const Donation = () => {
   const { user } = useAuth();
@@ -13,6 +11,7 @@ const Donation = () => {
     message: ''
   });
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,6 +19,7 @@ const Donation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await apiService.createDonation({
         amount: parseFloat(formData.amount),
@@ -29,7 +29,9 @@ const Donation = () => {
       setMessage(`Thank you for your donation of KES ${formData.amount}!`);
       setFormData({ ...formData, amount: '' });
     } catch (err) {
-      setMessage(`Error: ${err.message}`);
+      setMessage(`Error: ${err.message || 'Failed to process donation'}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,7 +61,9 @@ const Donation = () => {
           onChange={handleChange}
           placeholder="Optional message"
         />
-        <button type="submit">Donate</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Processing...' : 'Donate'}
+        </button>
       </form>
       {message && <div className="donation-message">{message}</div>}
     </div>

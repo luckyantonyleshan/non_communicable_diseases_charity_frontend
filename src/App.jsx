@@ -1,4 +1,3 @@
-// src/App.jsx
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -26,7 +25,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/learn" element={<Learnpage />} />
           
-          {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/diseases" element={<Diseases />} />
@@ -35,7 +33,6 @@ function App() {
             <Route path="/donate" element={<Donation />} />
           </Route>
 
-          {/* Admin-only Route */}
           <Route element={<ProtectedRoute adminOnly />}>
             <Route path="/admin" element={<Admin />} />
           </Route>
