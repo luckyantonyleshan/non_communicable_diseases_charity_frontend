@@ -1,56 +1,56 @@
 import React from 'react';
-import LearnCard from './Learncard';
 import '../styles/App.css';
 
-
 const Learnpage = () => {
-  const learningResources = [
+  const resources = [
     {
       id: 1,
       title: 'Understanding Diabetes',
-      description: 'Learn about the causes, symptoms, and prevention of diabetes.',
-      icon: 'https://example.com/diabetes-icon.png'
+      description: 'Explore the causes, symptoms, and prevention strategies for diabetes.',
+      image: 'src/assets/diabetes.jpg'
     },
     {
       id: 2,
       title: 'Heart Disease Prevention',
-      description: 'Discover ways to maintain a healthy heart and prevent cardiovascular diseases.',
-      icon: 'https://example.com/heart-icon.png'
+      description: 'Learn effective methods to maintain heart health and prevent cardiovascular issues.',
+      image: 'src/assets/Heart disease.jpg'
     },
     {
       id: 3,
       title: 'Cancer Awareness',
-      description: 'Important information about different types of cancer and early detection.',
-      icon: 'https://example.com/cancer-icon.png'
+      description: 'Gain insights into various cancers and the importance of early detection.',
+      image: 'src/assets/Cancer.jpg'
     }
   ];
 
   return (
-    <div className="learn-page">
-      <h1>Educational Resources</h1>
-      <p className="page-description">
-        Explore our collection of resources to learn more about non-communicable diseases.
-      </p>
-      
-      <div className="resources-grid">
-        {learningResources.map(resource => (
-          <div key={resource.id} className="resource-card">
-            <img src={resource.icon} alt={resource.title} className="resource-icon" />
-            <h3>{resource.title}</h3>
-            <p>{resource.description}</p>
-            <button className="learn-more-btn">Learn More</button>
-          </div>
-        ))}
-      </div>
-      
-      <section className="additional-resources">
-        <h2>Additional Learning Materials</h2>
-        <ul>
-          <li><a href="#research-papers">Research Papers</a></li>
-          <li><a href="#videos">Educational Videos</a></li>
-          <li><a href="#faqs">Frequently Asked Questions</a></li>
+    <div className="learn-container">
+      <header className="learn-header">
+        <h1>Learn About Non-Communicable Diseases</h1>
+        <p className="intro-text">Discover essential knowledge to improve your health and awareness.</p>
+      </header>
+      <main className="learn-content">
+        <div className="resource-grid">
+          {resources.map(resource => (
+            <div key={resource.id} className="resource-card">
+              <img src={resource.image} alt={resource.title} className="resource-image" />
+              <div className="card-content">
+                <h2>{resource.title}</h2>
+                <p>{resource.description}</p>
+                <a href={`/learn/${resource.id}`} className="learn-link">Learn More</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+      <footer className="learn-footer">
+        <h3>More Resources</h3>
+        <ul className="resource-list">
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#videos">Videos</a></li>
+          <li><a href="#guides">Guides</a></li>
         </ul>
-      </section>
+      </footer>
     </div>
   );
 };

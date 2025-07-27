@@ -1,4 +1,3 @@
-// pages/Login.jsx
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -29,7 +28,6 @@ function Login() {
       const userData = await apiService.getCurrentUser();
       login(userData, access_token);
       
-      // Redirect to the original requested page or dashboard
       const from = location.state?.from?.pathname || "/dashboard";
       navigate(from, { replace: true });
     } catch (err) {
