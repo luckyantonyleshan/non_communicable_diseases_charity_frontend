@@ -1,34 +1,23 @@
-import React from 'react';
-import '../styles/App.css';
+import React, { useState } from "react";
+import UserManagement from "../components/admin/UserManagement";
+import DiseaseManagement from "../components/admin/DiseaseManagement";
+import AreaManagement from "../components/admin/AreaManagement";
 
-const Admin = () => {
-  const donations = JSON.parse(localStorage.getItem('donations')) || [];
+export default function Admin() {
+  const [activeTab, setActiveTab] = useState("users");
 
   return (
-    <div className="admin-dashboard">
-      <h1>Admin Dashboard – Donations</h1>
-      {donations.length === 0 ? (
-        <p>No donations available.</p>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Amount (KES)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {donations.map((donation, index) => (
-              <tr key={index}>
-                <td>{donation.name}</td>
-                <td>{donation.amount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="admin-dashboard container">
+      <h1>Admin Dashboard</h1>
+      <div className="admin-tabs">
+        <button onClick={() => setActiveTab("users")}>Users</button>
+        <button onClick={() => setActiveTab("diseases")}>Diseases</button>
+        <button onClick={() => setActiveTab("areas")}>Areas</button>
+      </div>
+
+      {activeTab === "users" && <UserManagement />}
+      {activeTab === "diseases" && <DiseaseManagement />}
+      {activeTab === "areas" && <AreaManagement />}
     </div>
   );
-};
-
-export default Admin;
+}

@@ -1,24 +1,39 @@
 import { useAuth } from "../contexts/AuthContext";
 import LoginForm from "../components/LoginForm";
+import HeroSection from "../components/Herosection";
 import { Link } from "react-router-dom";
-import '../styles/App.css';
+import "../styles/App.css";
 
 function Landing() {
   const { user } = useAuth();
 
   return (
     <div className="landing-page">
-      <h1>Welcome to NCD Project Page</h1>
-      {user ? (
-        <p>You are logged in as {user.username}. <Link to="/dashboard">Go to Dashboard</Link></p>
-      ) : (
-        <>
-          <LoginForm />
-          <p>
-            Don't have an account? <Link to="/register">Register</Link>
-          </p>
-        </>
-      )}
+      <div className="page-background">
+        <div className="form-container">
+          {user ? (
+            <>
+              <HeroSection />
+              <p className="landing-message">
+                You are logged in as <strong>{user.username}</strong>.{" "}
+                <Link to="/dashboard" className="landing-link">
+                  Go to Dashboard
+                </Link>
+              </p>
+            </>
+          ) : (
+            <>
+              <LoginForm />
+              <p className="landing-message">
+                Don't have an account?{" "}
+                <Link to="/register" className="landing-link">
+                  Register
+                </Link>
+              </p>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

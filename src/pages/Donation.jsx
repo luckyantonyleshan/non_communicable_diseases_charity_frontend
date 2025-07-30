@@ -1,73 +1,47 @@
-import React, { useState } from 'react';
-import { useAuth } from "../contexts/AuthContext";
-import apiService from "../../services/apiService";
-import '../styles/App.css';
+import { useState, useEffect } from "react";
+import DonationForm from "../components/DonationForm";
 
-const Donation = () => {
-  const { user } = useAuth();
-  const [formData, setFormData] = useState({
-    donor_name: user?.username || '',
-    amount: '',
-    message: ''
-  });
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
+export default function Donation() {
+  const [donations, setDonations] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  useEffect(() => {
+    fetch("http://localhost:5000/donations")
+      .then((res) => res.json())
+      .then((data) => setDonations(data))
+      .catch((err) => console.error("Error loading donations:", err))
+      .finally(() => setLoading(false));
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await apiService.createDonation({
-        amount: parseFloat(formData.amount),
-        donor_name: formData.donor_name,
-        message: formData.message
-      });
-      setMessage(`Thank you for your donation of KES ${formData.amount}!`);
-      setFormData({ ...formData, amount: '' });
-    } catch (err) {
-      setMessage(`Error: ${err.message || 'Failed to process donation'}`);
-    } finally {
-      setLoading(false);
-    }
+  const handleDonationSubmit = (newDonation) => {
+    setDonations((prev) => [...prev, newDonation]);
   };
 
   return (
-    <div className="donation-page">
-      <h1>Donate to Support NCD Awareness</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="donor_name"
-          value={formData.donor_name}
-          onChange={handleChange}
-          placeholder="Your Name"
-          required
-        />
-        <input
-          name="amount"
-          type="number"
-          value={formData.amount}
-          onChange={handleChange}
-          placeholder="Amount in KES"
-          min="1"
-          required
-        />
-        <textarea
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          placeholder="Optional message"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Processing...' : 'Donate'}
-        </button>
-      </form>
-      {message && <div className="donation-message">{message}</div>}
+    <div className="container">
+      <h1>Support Affected Areas</h1>
+      <p>Your contribution can make a difference in the fight against communicable diseases.</p>
+
+      <DonationForm onSubmit={handleDonationSubmit} />
+
+      {loading ? (
+        <p>Loading donations...</p>
+      ) : (
+        <div className="donations-list">
+          {donations.length === 0 && <p>No donations yet. Be the first to contribute!</p>}
+          {donations.map((donation, index) => (
+            <div className="donation-card" key={index}>
+              <h3>{donation.area}</h3>
+              <p><strong>Amount:</strong> ${donation.amount}</p>
+              {donation.message && <p>{donation.message}</p>}
+              <small>
+                By: {donation.user}{" "}
+                {donation.created_at && `on ${donation.created_at}`}
+              </small>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
-};
-
-export default Donation;
+}

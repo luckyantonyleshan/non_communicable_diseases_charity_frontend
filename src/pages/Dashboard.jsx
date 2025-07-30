@@ -1,5 +1,5 @@
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import '../styles/App.css';
 
 export default function Dashboard() {
@@ -26,6 +26,10 @@ export default function Dashboard() {
             <h3>Admin Panel</h3>
           </div>
         )}
+        <Link to="/reviews" className="dashboard-card">
+          <h3>Leave a Review</h3>
+          <p>Share how you want to help eradicate diseases.</p>
+        </Link>
       </div>
       <button className="logout-btn" onClick={handleLogout}>
         Logout
