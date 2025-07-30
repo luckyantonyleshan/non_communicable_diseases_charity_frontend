@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { API_BASE_URL } from "../config"
+import { API_BASE_URL } from "../../config";
 
 export default function AreaManagement() {
   const [areas, setAreas] = useState([]);
@@ -7,8 +7,8 @@ export default function AreaManagement() {
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/areas`)
-      .then(res => res.json())
-      .then(data => setAreas(data));
+      .then((res) => res.json())
+      .then((data) => setAreas(data));
   }, []);
 
   const handleCreate = async (e) => {
@@ -27,7 +27,7 @@ export default function AreaManagement() {
 
   const handleDelete = async (id) => {
     await fetch(`${API_BASE_URL}/api/areas/${id}`, { method: "DELETE" });
-    setAreas(areas.filter(a => a.id !== id));
+    setAreas(areas.filter((a) => a.id !== id));
   };
 
   return (
@@ -44,7 +44,7 @@ export default function AreaManagement() {
       </form>
 
       <ul>
-        {areas.map(a => (
+        {areas.map((a) => (
           <li key={a.id}>
             {a.name}
             <button onClick={() => handleDelete(a.id)}>Delete</button>
