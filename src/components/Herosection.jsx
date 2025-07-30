@@ -1,22 +1,40 @@
-import React from 'react';
-import '../styles/App.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/App.css";
 
-const HeroSection = () => {
+export default function HeroSection() {
+  const navigate = useNavigate();
+
   return (
     <section className="hero">
       <div className="hero-text">
-        <h1>Protecting Communities.<br />Preventing Diseases.</h1>
-        <p>Empowering health with technology-based solutions<br />for communicable disease prevention</p>
-        <button className="get-started">Get Started</button>
+        <h1>Together Against Non‑Communicable Diseases</h1>
+        <p>
+          Join us in creating awareness, providing resources, and making a
+          difference in communities affected by diabetes, heart disease, cancer
+          and more.
+        </p>
+        <div className="hero-buttons">
+          <button
+            className="get-started"
+            onClick={() => navigate("/learn")}
+          >
+            Learn More
+          </button>
+          <button
+            className="donate-btn"
+            onClick={() => navigate("/donate")}
+          >
+            Donate Now
+          </button>
+        </div>
       </div>
       <div className="hero-image">
         <img
-          src="https://media.istockphoto.com/id/471930921/photo/non-communicable-disease.jpg?s=612x612&w=0&k=20&c=vatAyv5HRf9kwqoZB9eJVzvifQHxtBMAy2hDeKUf6JQ="
-          alt="Microscopic view"
+          src="../assets/Heart disease.jpg"
+          alt="Healthcare support"
         />
       </div>
     </section>
   );
-};
-
-export default HeroSection;
+}
