@@ -7,19 +7,19 @@ const Learnpage = () => {
       id: 1,
       title: 'Understanding Diabetes',
       description: 'Explore the causes, symptoms, and prevention strategies for diabetes.',
-      image: 'src/assets/diabetes.jpg'
+      image: '/diabetes.jpg'
     },
     {
       id: 2,
       title: 'Heart Disease Prevention',
       description: 'Learn effective methods to maintain heart health and prevent cardiovascular issues.',
-      image: 'src/assets/Heart disease.jpg'
+      image: '/Heart disease.jpg'
     },
     {
       id: 3,
       title: 'Cancer Awareness',
       description: 'Gain insights into various cancers and the importance of early detection.',
-      image: 'src/assets/Cancer.jpg'
+      image: '/Cancer.jpg'
     }
   ];
 
