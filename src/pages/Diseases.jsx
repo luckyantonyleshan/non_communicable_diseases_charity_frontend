@@ -1,4 +1,4 @@
-import React from "react";
+import DiseaseCard from "../components/DiseaseCard"
 
 const diseases = [
   {
@@ -37,34 +37,26 @@ const diseases = [
     prevalence: "Millions at risk annually",
     link: "https://www.who.int/news-room/fact-sheets/detail/cholera",
   },
-];
+]
 
 export default function Diseases() {
   return (
-    <div className="container">
-      <h1 style={{ textAlign: "center", marginBottom: "2rem", color: "#2c3e50" }}>
-        Most Prevalent Communicable Diseases
-      </h1>
-      <div className="diseases-grid">
-        {diseases.map((disease) => (
-          <div className="disease-card" key={disease.name}>
-            <h3>{disease.name}</h3>
-            <p className="description">{disease.description}</p>
-            <div className="meta-data">
-              <span className="prevalence">{disease.prevalence}</span>
-              <a
-                href={disease.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="details-link"
-              >
-                Learn more →
-              </a>
-            </div>
-          </div>
-        ))}
+    <div className="diseases-page">
+      <div className="container">
+        <div className="page-header">
+          <h1>Most Prevalent Communicable Diseases</h1>
+          <p className="page-description">
+            Understanding these diseases is the first step toward prevention and treatment. Learn about the most common
+            communicable diseases affecting communities worldwide.
+          </p>
+        </div>
+
+        <div className="diseases-grid">
+          {diseases.map((disease) => (
+            <DiseaseCard key={disease.name} disease={disease} />
+          ))}
+        </div>
       </div>
     </div>
-  );
+  )
 }
- 

@@ -1,52 +1,12 @@
-#  Non-Communicable Diseases Charity Web App
+# React + Vite
 
-A web application designed to **create awareness, gather support, and facilitate donations** towards eradicating communicable diseases in affected areas.
-The app allows users to:
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- Learn about the most prevalent communicable diseases
-- Explore areas affected (with an interactive map)
-- Leave reviews and suggestions on how they want to help
-- Donate to support specific areas
-- For **Admins**: Manage users, diseases, and affected areas (CRUD operations)
+Currently, two official plugins are available:
 
----
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-##  Features
+## Expanding the ESLint configuration
 
-### Public Features
-- **Landing Page** – Overview of the platform with login/register options
-- **Login & Register** – Create an account and access the dashboard
-- **Hero Section** – Engaging UI with project goals
-- **Diseases Page** – List of the most prevalent diseases (links to external resources)
-- **Areas Page** – Areas most affected, displayed with an **interactive map**
-
-### Authenticated Users
-- Access a personal **Dashboard**
-- **Submit Reviews** – Share suggestions on how to help
-- **Make Donations** – Support specific areas
-
-### Admin Panel
-- **CRUD on Diseases and Areas**
-- **Manage Users** – Add users, assign roles (user/admin)
-- Restricted access to `/admin`
-
----
-
-##  Technologies Used
-
-- **Frontend:** React + Vite
-- **Routing:** React Router DOM
-- **State Management:** React Context API
-- **Maps:** React-Leaflet + OpenStreetMap
-- **Styling:** Custom CSS (Glassmorphism + Responsive Design)
-- **Backend:** (Your backend technology here, e.g., Flask, Node.js)
-- **Authentication:** Token-based auth (localStorage)
-
----
-
-## 🧑 How to Use
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/yourusername/ncd-charity-webapp.git
-cd ncd-charity-webapp
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
